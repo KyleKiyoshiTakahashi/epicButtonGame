@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EPIC BUTTON GAME</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+    
+            var socket = io(); //1
+            $('#btn').on("click", function(){
+    			socket.emit('count')
+    		});
+    		$('#reset').on("click", function(){
+    			socket.emit('reset')
+    		});
+    		socket.on('countTotal', function(x){
+                $('#countTotal').html(x)
+            })
+            
+     
+         });
+    </script>
+</head>
+<body>
+	<h1>The Button Has Been Pushed <span id="countTotal" >0</span> Time(s)</h1>
+	<h3>Push The Button To Update The Count!</h3>
+	 <button id="btn">PUSH ME</button>
+	<hr>
+	<button id="reset">RESET</button>
+</body>
+</html>
